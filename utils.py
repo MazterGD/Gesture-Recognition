@@ -82,7 +82,7 @@ def draw_status(frame, gesture, fps, confidence, fingers_up, zone, debug=False):
 		)
 		cv2.putText(
 			frame,
-			"Keys: q quit | d debug | s stats",
+			"Keys: q quit | d debug | s stats | c calibrate | g gaze on/off",
 			(20, frame.shape[0] - 20),
 			cv2.FONT_HERSHEY_SIMPLEX,
 			0.6,

@@ -10,6 +10,8 @@ This project uses OpenCV + MediaPipe Hands for real-time hand landmark detection
 - Gesture classification for common actions
 - Smoothed cursor movement (reduced jitter)
 - Gesture debouncing to avoid accidental repeats
+- 1-second global gap between triggered gestures
+- Slower volume step rate for safer adjustment
 - Visual overlay with FPS and active gesture
 - Detection zone to reduce false triggers
 
@@ -23,6 +25,9 @@ This project uses OpenCV + MediaPipe Hands for real-time hand landmark detection
 - Thumbs up: Volume up
 - Four fingers: Volume down
 - Rock (thumb + pinky): Mute toggle
+- Thumb + index + middle: Play/Pause media
+- Thumb + index + pinky: Next virtual desktop
+- Middle + ring + pinky: Previous virtual desktop
 - Fist: Safe/no action
 
 ## Tech Stack

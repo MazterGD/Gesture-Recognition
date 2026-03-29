@@ -34,27 +34,39 @@ class GestureEngine:
             return "none", []
 
         pinch = self._is_pinch(positions)
-        spread = self._distance(positions[8], positions[12])
+        index_up = positions[8][1] < positions[5][1]
+        index_down = positions[8][1] > positions[5][1]
 
-        if pinch and not fingers[2] and not fingers[3] and not fingers[4]:
-            return "pinch", fingers
+        if (pinch and not fingers[2] and not fingers[3] and not fingers[4]) or (
+            fingers == [True, True, False, False, False]
+        ):
+            return "pinch_zoom", fingers
+
+        if fingers == [False, True, True, False, False] and positions[12][0] < positions[8][0]:
+            return "close_window", fingers
 
         if fingers == [False, False, False, False, False]:
             return "fist", fingers
-        if fingers == [False, True, False, False, False]:
-            return "point", fingers
+        if fingers == [False, True, False, False, False] and index_up:
+            return "index_up", fingers
+        if fingers == [False, False, False, False, False] and index_down:
+            return "index_down", fingers
         if fingers == [False, True, True, False, False]:
-            if spread >= self.spread_threshold:
-                return "right_click", fingers
             return "peace", fingers
         if fingers == [True, True, True, True, True]:
             return "open_hand", fingers
-        if fingers == [True, False, False, False, False]:
+        if fingers == [True, False, False, False, False] and positions[4][1] < positions[3][1]:
             return "thumbs_up", fingers
+        if fingers == [True, False, False, False, False] and positions[4][1] > positions[3][1]:
+            return "thumbs_down", fingers
         if fingers == [False, True, True, True, True]:
             return "four_fingers", fingers
         if fingers == [True, False, False, False, True]:
-            return "rock", fingers
+            return "thumb_pinky", fingers
+        if fingers == [False, True, True, True, False]:
+            return "three_fingers", fingers
+        if fingers == [True, True, True, False, False]:
+            return "play_pause", fingers
         return "unknown", fingers
 
     @staticmethod
